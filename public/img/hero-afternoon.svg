@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" fill="none">
+  <defs>
+    <linearGradient id="aftSky" x1="0" y1="0" x2="0" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="50%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="aftHillBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="aftHillMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="aftHillFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Background -->
+  <rect width="400" height="180" rx="24" fill="url(#aftSky)"/>
+
+  <!-- Bright high sun -->
+  <circle cx="90" cy="50" r="38" fill="#FEF08A" fill-opacity="0.6"/>
+  <circle cx="90" cy="50" r="26" fill="#FACC15"/>
+  <circle cx="90" cy="50" r="20" fill="#FDE047"/>
+
+  <!-- Soft White Fluffy Clouds -->
+  <g fill="#FFFFFF" fill-opacity="0.9">
+    <!-- Cloud 1 -->
+    <path d="M260 55 a16 16 0 0 1 24 -6 a22 22 0 0 1 36 6 a18 18 0 0 1 14 18 a16 16 0 0 1 -14 16 l-60 0 a16 16 0 0 1 0 -34 z"/>
+    <!-- Cloud 2 -->
+    <path d="M150 75 a12 12 0 0 1 18 -4 a16 16 0 0 1 26 4 a14 14 0 0 1 10 14 a12 12 0 0 1 -10 12 l-44 0 a12 12 0 0 1 0 -26 z" fill-opacity="0.8"/>
+  </g>
+
+  <!-- Distant Blue Hills -->
+  <path d="M-20 180 Q80 125 180 140 T380 135 L420 180 Z" fill="url(#aftHillBack)" fill-opacity="0.45"/>
+
+  <!-- Mid Green Rolling Hills -->
+  <path d="M-20 180 Q100 135 220 155 Q310 135 420 165 L420 180 Z" fill="url(#aftHillMid)" fill-opacity="0.85"/>
+
+  <!-- Front Green Valley -->
+  <path d="M-20 180 Q80 152 190 170 Q300 148 420 172 L420 180 Z" fill="url(#aftHillFront)"/>
+
+  <!-- Friendly Rounded Trees -->
+  <g opacity="0.95">
+    <path d="M310 166 L310 154" stroke="#064E3B" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="310" cy="146" rx="12" ry="16" fill="#047857"/>
+    <ellipse cx="308" cy="144" rx="8" ry="11" fill="#10B981"/>
+
+    <path d="M332 170 L332 158" stroke="#064E3B" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="332" cy="150" rx="14" ry="18" fill="#065F46"/>
+    <ellipse cx="330" cy="148" rx="9" ry="12" fill="#059669"/>
+  </g>
+</svg>

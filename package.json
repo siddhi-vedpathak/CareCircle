@@ -1,0 +1,27 @@
+{
+  "name": "carecircle",
+  "version": "0.1.0",
+  "description": "CareCircle - Elderly Care Coordination Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "elderly-care",
+    "carecircle",
+    "express",
+    "nodemailer",
+    "cloud-run"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^10.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,3876 @@
+/* ==========================================================================
+   CareCircle - Apple Health meets warm family app Design System
+   Optimized for senior comprehension, 390px and 360px mobile viewports,
+   high contrast (7:1+), min 18px font size everywhere.
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --bg-cream: #FFF8F0;
+  --card-white: #FFFFFF;
+  --card-radius: 28px;
+  --btn-radius: 20px;
+  --shadow-soft: 0 8px 24px rgba(31, 41, 55, 0.05);
+  --shadow-float: 0 12px 36px rgba(31, 41, 55, 0.12);
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.04);
+
+  --primary-green: #2E7D5B;
+  --primary-green-hover: #246549;
+  --primary-green-active: #1C513A;
+  --primary-green-light: #EBF7F0;
+
+  --accent-amber: #F59E0B;
+  --accent-amber-light: #FEF3C7;
+
+  --soft-coral: #F26B5B;
+  --soft-coral-light: #FDF2F0;
+  --soft-coral-dark: #C94A3B;
+
+  --text-dark: #1F2937;
+  --text-muted: #6B7280;
+  --border-light: #E5E7EB;
+
+  /* Typography */
+  --font-family: 'Nunito', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-base: 22px;
+  --font-hero-clock: 56px;
+  --font-heading: 34px;
+  --font-med-name: 28px;
+  --font-title-sm: 22px;
+  --font-min: 18px;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: var(--font-family);
+  font-size: var(--font-base);
+  line-height: 1.4;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enforce Minimum 18px everywhere */
+p, span, div, a, button, input, select, textarea, label, small {
+  font-size: inherit;
+}
+
+small, .small-text, .clock-demo-hint, .chip-label, .meta-tag {
+  font-size: 18px !important;
+}
+
+/* Root Mount */
+#app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-cream);
+}
+
+.carecircle-shell {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--bg-cream);
+}
+
+.tab-content-area {
+  flex: 1;
+  padding-bottom: 108px; /* space for 72px floating bottom nav + margin */
+}
+
+/* Spacing System */
+.today-body-content, .medicines-main-body, .info-main-body {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Section titles */
+.section-title-sm {
+  font-size: var(--font-title-sm);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+/* Micro-interaction: Slide-up on load */
+.slide-up-card {
+  animation: slideUpCard 0.3s ease-out forwards;
+}
+
+@keyframes slideUpCard {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   TOP BAR & LANGUAGE SWITCHER PILL (ALWAYS VISIBLE)
+   ========================================================================== */
+
+.top-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px 20px;
+}
+
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-green);
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.screen-title-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-dark);
+}
+
+.screen-title-text {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.lang-switcher-pill {
+  display: inline-flex;
+  background: #FFFFFF;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 24px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.lang-pill-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-pill-btn.active {
+  background: var(--primary-green);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(46, 125, 91, 0.25);
+}
+
+/* Audio Banner */
+.audio-unlock-strip {
+  background: #EFF6FF;
+  border: 2px solid #BFDBFE;
+  border-radius: 20px;
+  margin: 0 20px 16px 20px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.strip-icon {
+  color: #2563EB;
+}
+
+.strip-text {
+  flex: 1;
+}
+
+.strip-text strong {
+  display: block;
+  font-size: 19px;
+  color: #1E40AF;
+}
+
+.strip-text small {
+  color: #3B82F6;
+}
+
+.strip-btn {
+  background: #2563EB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   HERO CARD (Time-of-day gradient, 56px clock, 34px greeting, soft glass)
+   ========================================================================== */
+
+.hero-time-card {
+  margin: 0 20px 20px 20px;
+  border-radius: 34px;
+  padding: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  transition: background 0.4s ease;
+}
+
+/* Morning Theme */
+.hero-time-card.theme-morning {
+  background: linear-gradient(145deg, #FFE2CD 0%, #FFF3B8 100%);
+  color: #1F2937;
+}
+
+.hero-time-card.theme-morning .theme-svg-sun {
+  color: #D97706;
+}
+
+/* Afternoon Theme */
+.hero-time-card.theme-afternoon {
+  background: linear-gradient(145deg, #BAE6FD 0%, #E0F2FE 100%);
+  color: #0C4A6E;
+}
+
+.hero-time-card.theme-afternoon .theme-svg-day {
+  color: #0284C7;
+}
+
+/* Night Theme */
+.hero-time-card.theme-night {
+  background: linear-gradient(145deg, #1E293B 0%, #0F172A 100%);
+  color: #F8FAFC;
+}
+
+.hero-time-card.theme-night .theme-svg-moon {
+  color: #FDE047;
+}
+
+.hero-glass-overlay {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 28px;
+  padding: 22px 20px;
+}
+
+.theme-night .hero-glass-overlay {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hero-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.btn-read-screen {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.theme-night .btn-read-screen {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+.hero-greeting {
+  font-size: var(--font-heading);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero-clock-box {
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 22px;
+  padding: 16px 14px;
+  text-align: center;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  user-select: none;
+}
+
+.theme-night .hero-clock-box {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.hero-clock-time {
+  font-size: var(--font-hero-clock);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.hero-clock-date {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 4px;
+  opacity: 0.95;
+}
+
+.clock-demo-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   CARDS SYSTEM
+   ========================================================================== */
+
+.card {
+  background: var(--card-white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+  border: 1px solid rgba(229, 231, 235, 0.6);
+}
+
+/* Circular Countdown Ring Card */
+.countdown-ring-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.countdown-ring-wrap {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 16px;
+}
+
+.ring-svg {
+  transform: rotate(-90deg);
+}
+
+.ring-fill {
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.ring-inner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.ring-large-label {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--primary-green);
+  line-height: 1.2;
+}
+
+.ring-sub-fraction {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.next-pill-preview-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-cream);
+  border-radius: 20px;
+  padding: 12px 16px;
+  width: 100%;
+  margin-bottom: 16px;
+  border: 1.5px solid #FDE68A;
+  text-align: left;
+}
+
+.preview-mini-pill {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-tag {
+  display: block;
+  font-size: 18px;
+  color: #B45309;
+  font-weight: 700;
+}
+
+.preview-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.progress-bar-wrap {
+  width: 100%;
+  height: 12px;
+  background: #E5E7EB;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary-green);
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+.progress-text-label {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   PILL CARDS & REMINDER MOMENT
+   - Full width
+   - Pill illustration at 96px on the left with soft tinted circle
+   - Name at 28px bold
+   - Colored rounded chips ("For BP", etc.)
+   - Big circular tick button on right with spring animation
+   ========================================================================== */
+
+.reminder-moment-hero {
+  border: 3px solid var(--accent-amber);
+  animation: attentionGlow 3s infinite ease-in-out;
+}
+
+@keyframes attentionGlow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15); }
+  50% { box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4); }
+}
+
+.reminder-moment-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.reminder-pill-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--accent-amber-light);
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reminder-hero-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.reminder-hero-sub {
+  font-size: 19px;
+  color: var(--text-muted);
+}
+
+/* After-food check */
+.after-food-banner {
+  background: #FEF3C7;
+  border-radius: 20px;
+  padding: 16px;
+  border: 1.5px solid #FCD34D;
+  margin-bottom: 20px;
+}
+
+.after-food-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  color: #92400E;
+  margin-bottom: 12px;
+}
+
+.after-food-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-food-toggle {
+  min-height: 54px;
+  border-radius: 16px;
+  border: 2px solid #D97706;
+  background: #FFFFFF;
+  color: #92400E;
+  font-family: var(--font-family);
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-food-toggle.active {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: #FFFFFF;
+}
+
+.btn-food-toggle.active-warn {
+  background: var(--soft-coral);
+  border-color: var(--soft-coral);
+  color: #FFFFFF;
+}
+
+.after-food-hint {
+  font-size: 18px;
+  font-weight: 600;
+  color: #B45309;
+  margin-top: 10px;
+}
+
+/* Pill Cards List */
+.pill-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pill-full-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #F9FAFB;
+  border-radius: 24px;
+  padding: 16px;
+  border: 2px solid #E5E7EB;
+}
+
+.pill-left-art {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill-tinted-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.pill-center-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.pill-name-bold {
+  font-size: var(--font-med-name);
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.pill-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.chip-label {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.chip-purpose {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.chip-dose {
+  background: #E0E7FF;
+  color: #3730A3;
+}
+
+.chip-food {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.chip-water, .chip-time {
+  background: #E5E7EB;
+  color: var(--text-dark);
+}
+
+.pill-desc-line {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Spring Tick Button */
+.pill-right-tick {
+  flex-shrink: 0;
+}
+
+.btn-spring-tick {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 3px solid var(--primary-green);
+  background: var(--primary-green);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-spring-tick:active {
+  transform: scale(0.85);
+}
+
+.btn-spring-tick.checked {
+  animation: springCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+}
+
+@keyframes springCheck {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Buttons System */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  border-radius: var(--btn-radius);
+  font-family: var(--font-family);
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+  user-select: none;
+  padding: 12px 20px;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: var(--primary-green);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(46, 125, 91, 0.28);
+  animation: softButtonPulse 3s infinite ease-in-out;
+}
+
+@keyframes softButtonPulse {
+  0%, 100% { box-shadow: 0 6px 18px rgba(46, 125, 91, 0.28); }
+  50% { box-shadow: 0 8px 24px rgba(46, 125, 91, 0.45); }
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-secondary-quiet {
+  background: transparent;
+  color: var(--text-muted);
+  border: 2px dashed #D1D5DB;
+  margin-top: 10px;
+}
+
+.reminder-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   FLOATING BOTTOM NAVIGATION BAR
+   - White
+   - 28px radius
+   - Shadow
+   - Active tab: filled green pill with icon + label
+   ========================================================================== */
+
+.floating-nav-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 400px;
+  height: 72px;
+  background: #FFFFFF;
+  border-radius: 28px;
+  box-shadow: var(--shadow-float);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 6px;
+  z-index: 100;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.floating-nav-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 22px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.floating-nav-tab.active {
+  background: var(--primary-green);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(46, 125, 91, 0.3);
+}
+
+.nav-icon-slot {
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   MOOD CHECK & QUICK ACTIONS
+   ========================================================================== */
+
+.mood-card {
+  padding: 20px;
+}
+
+.mood-faces-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mood-face-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+.mood-face-btn.selected {
+  background: #ECFDF5;
+  border-color: var(--primary-green);
+  box-shadow: 0 4px 12px rgba(46, 125, 91, 0.15);
+}
+
+.mood-emoji {
+  font-size: 32px;
+}
+
+.mood-label {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--text-dark);
+}
+
+.quick-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-action-call {
+  font-size: 19px;
+}
+
+.btn-action-emergency {
+  background: var(--soft-coral-light);
+  color: var(--soft-coral-dark);
+  border-color: #FECACA;
+  font-size: 19px;
+}
+
+/* Coral Alert */
+.alert-card-coral {
+  background: var(--soft-coral-light);
+  border-left: 8px solid var(--soft-coral);
+  border-color: #FECACA;
+}
+
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  color: var(--soft-coral-dark);
+  margin-bottom: 6px;
+}
+
+.alert-body {
+  font-size: 19px;
+  color: #7F1D1D;
+  font-weight: 600;
+}
+
+/* Appointment & Family Message */
+.card-icon-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.appointment-doc-name {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.appointment-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.message-bubble {
+  background: #FFFBEB;
+  border-radius: 20px;
+  padding: 14px 18px;
+  border: 1px solid #FDE68A;
+}
+
+.message-quote {
+  font-size: 20px;
+  color: var(--text-dark);
+  font-style: italic;
+}
+
+.message-sender {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: #B45309;
+  margin-top: 6px;
+}
+
+/* ==========================================================================
+   WIZARD REDESIGN
+   ========================================================================== */
+
+.wizard-screen {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-cream);
+  padding: 16px 20px 24px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-top-nav {
+  margin-bottom: 16px;
+}
+
+.wizard-progress-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.progress-dot {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: #E5E7EB;
+  transition: background 0.3s ease;
+}
+
+.progress-dot.active {
+  background: var(--primary-green);
+}
+
+.progress-dot.completed {
+  background: #86EFAC;
+}
+
+.wizard-top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.step-counter-pill {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.wizard-body-card {
+  background: #FFFFFF;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+  padding: 24px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-step-illustration {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.illus-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illus-elder { background: #FEF3C7; color: #D97706; }
+.illus-voice { background: #E0E7FF; color: #4F46E5; }
+.illus-pill { background: #DCFCE7; color: var(--primary-green); }
+.illus-phone { background: #FEE2E2; color: #DC2626; }
+
+.wizard-question-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.25;
+}
+
+.wizard-question-sub {
+  font-size: 19px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  min-height: 56px;
+  border-radius: 18px;
+  border: 2px solid var(--border-light);
+  padding: 12px 16px;
+  font-family: var(--font-family);
+  font-size: 20px;
+  color: var(--text-dark);
+  background: #F9FAFB;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--primary-green);
+  background: #FFFFFF;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.choice-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.choice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  border-radius: 20px;
+  border: 2px solid var(--border-light);
+  background: #F9FAFB;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.choice-card.selected {
+  border-color: var(--primary-green);
+  background: #ECFDF5;
+}
+
+.choice-tag-title {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.choice-tag-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.wizard-actions-row {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.btn-back {
+  flex: 0 0 120px;
+  font-size: 20px;
+}
+
+/* Voice Wizard */
+.voice-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.voice-selection-card {
+  border: 2px solid var(--border-light);
+  border-radius: 22px;
+  padding: 16px;
+  background: #F9FAFB;
+  cursor: pointer;
+}
+
+.voice-selection-card.selected {
+  border-color: var(--primary-green);
+  background: #ECFDF5;
+}
+
+.voice-card-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.voice-opt-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  color: #FFFFFF;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-card-title {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.voice-card-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.btn-sample-play {
+  min-height: 50px;
+  font-size: 18px;
+}
+
+.family-record-box {
+  background: #FFFFFF;
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid var(--border-light);
+  margin-top: 8px;
+}
+
+.record-controls-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.recording-active {
+  color: var(--soft-coral) !important;
+  border-color: var(--soft-coral) !important;
+}
+
+/* Pill Designer */
+.pill-designer-box {
+  background: #F9FAFB;
+  border-radius: 22px;
+  padding: 16px;
+  border: 2px solid var(--border-light);
+  margin-top: 10px;
+}
+
+.pill-designer-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background: #FFFFFF;
+  border-radius: 18px;
+  margin-bottom: 12px;
+}
+
+.pill-designer-desc {
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.selector-row-item {
+  margin-bottom: 12px;
+}
+
+.selector-title {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.color-palette-row, .shape-buttons-row, .size-buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.swatch-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+}
+
+.swatch-btn.active {
+  border-color: var(--text-dark);
+  transform: scale(1.1);
+}
+
+.shape-btn, .size-btn {
+  min-height: 44px;
+  padding: 6px 14px;
+  border-radius: 14px;
+  border: 2px solid var(--border-light);
+  background: #FFFFFF;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.shape-btn.active, .size-btn.active {
+  background: var(--primary-green);
+  color: #FFFFFF;
+  border-color: var(--primary-green);
+}
+
+.toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: #E5E7EB;
+  border-radius: 16px;
+  padding: 3px;
+}
+
+.toggle-btn {
+  min-height: 48px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.toggle-btn.active {
+  background: #FFFFFF;
+  color: var(--text-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.wizard-finish-wrap {
+  text-align: center;
+  padding: 24px 10px;
+}
+
+.finish-heart-badge {
+  color: var(--primary-green);
+  margin-bottom: 12px;
+}
+
+.finish-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--primary-green);
+}
+
+.finish-prompt {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-top: 8px;
+}
+
+.finish-sub {
+  font-size: 19px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.finish-summary-chip {
+  background: #F3F4F6;
+  border-radius: 18px;
+  padding: 12px 18px;
+  display: inline-flex;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+/* ==========================================================================
+   MEDICINES & MY INFO DETAILS
+   ========================================================================== */
+
+.schedule-slot-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.slot-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slot-icon-morning { color: #D97706; }
+.slot-icon-afternoon { color: #0284C7; }
+.slot-icon-night { color: #F59E0B; }
+
+.slot-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.schedule-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.empty-slot-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 18px;
+  border: 1px dashed var(--border-light);
+}
+
+.med-full-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+}
+
+.med-left-graphic {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.med-body-details {
+  flex: 1;
+}
+
+.med-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.med-title-text {
+  font-size: var(--font-med-name);
+  font-weight: 800;
+}
+
+.med-localized-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Profile & Caregiver Cards */
+.profile-hero-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-avatar-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #FEF3C7;
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-name-bold {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.profile-tags-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.voice-notice-banner {
+  background: #FFFBEB;
+  border: 1px solid #FCD34D;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #92400E;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.btn-test-voice {
+  min-height: 52px;
+  font-size: 18px;
+  margin-top: 12px;
+}
+
+.contacts-list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-card-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.contact-card-row:last-child {
+  border-bottom: none;
+}
+
+.contact-left-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.contact-details {
+  flex: 1;
+}
+
+.contact-title {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.contact-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  display: block;
+}
+
+.contact-phone-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+.btn-dial-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary-green-light);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.passcode-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.passcode-input {
+  max-width: 140px;
+  text-align: center;
+  letter-spacing: 6px;
+  font-size: 24px;
+}
+
+.btn-unlock-passcode {
+  flex: 1;
+  min-height: 56px;
+}
+
+.unlocked-caregiver-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.unlocked-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-green-light);
+  color: var(--primary-green);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 800;
+  align-self: flex-start;
+}
+
+.edit-profile-subcard, .switch-elder-subcard {
+  background: #F9FAFB;
+  border-radius: 22px;
+  padding: 16px;
+  border: 1.5px solid var(--border-light);
+}
+
+.subcard-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.subcard-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.saved-elders-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.elder-switch-chip {
+  padding: 6px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-save-profile, .btn-switch-elder, .btn-toggle-voice {
+  min-height: 56px;
+  font-size: 19px;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   MODALS
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+}
+
+.modal-overlay.hidden {
+  display: none !important;
+}
+
+.modal-card {
+  background: #FFFFFF;
+  border-radius: var(--card-radius);
+  max-width: 400px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: var(--shadow-float);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.modal-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  margin-bottom: 18px;
+}
+
+.reason-chips-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.reason-chip {
+  min-height: 54px;
+  border-radius: 16px;
+  border: 2px solid var(--border-light);
+  background: #F9FAFB;
+  font-family: var(--font-family);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 10px 16px;
+  text-align: left;
+}
+
+.reason-chip:active, .reason-chip:hover {
+  background: var(--soft-coral-light);
+  border-color: var(--soft-coral);
+  color: var(--soft-coral-dark);
+}
+
+/* Celebration Modal */
+.celebration-card {
+  background: #FFFFFF;
+  border-radius: 34px;
+  max-width: 380px;
+  width: 100%;
+  padding: 36px 20px 24px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(46, 125, 91, 0.25);
+}
+
+.celebration-avatar-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--primary-green-light);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.celebration-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--primary-green);
+  line-height: 1.25;
+}
+
+.celebration-subtitle {
+  font-size: 19px;
+  color: var(--text-dark);
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.celebration-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.confetti-particle {
+  position: absolute;
+  font-size: 24px;
+  animation: floatConfetti 2s ease-out forwards;
+}
+
+@keyframes floatConfetti {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(120px); }
+}
+
+/* Demo Modal */
+.demo-modal-card {
+  max-width: 420px;
+}
+
+.demo-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1E40AF;
+  background: #DBEAFE;
+  padding: 4px 14px;
+  border-radius: 14px;
+}
+
+.btn-close-modal {
+  background: #F3F4F6;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+}
+
+.demo-status-box {
+  background: #EFF6FF;
+  border-radius: 16px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.demo-active-tag {
+  background: #F59E0B;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.demo-real-tag {
+  background: #10B981;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.demo-section {
+  margin-bottom: 16px;
+}
+
+.demo-section-heading {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.demo-buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-action-btn {
+  min-height: 52px;
+  font-size: 18px;
+}
+
+.demo-buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demo-chip-btn {
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  background: #F9FAFB;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Footer Disclaimer */
+.app-disclaimer-footer {
+  text-align: center;
+  padding: 20px 20px 12px 20px;
+  color: var(--text-muted);
+}
+
+.app-disclaimer-footer p {
+  font-size: 18px;
+}
+
+/* ==========================================================================
+   VIEWPORT RESPONSIVENESS: 390px and 360px
+   ========================================================================== */
+
+@media (max-width: 375px) {
+  :root {
+    --font-hero-clock: 50px;
+    --font-heading: 30px;
+    --font-med-name: 24px;
+  }
+
+  .today-body-content, .medicines-main-body, .info-main-body {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .hero-time-card {
+    margin: 0 16px 16px 16px;
+  }
+
+  .pill-full-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .pill-left-art, .pill-tinted-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .floating-nav-bar {
+    width: calc(100% - 24px);
+    height: 68px;
+    bottom: 12px;
+  }
+
+  .floating-nav-tab {
+    padding: 8px 10px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .btn-primary, .reminder-moment-hero {
+    animation: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   TODAY SCREEN: NEW 8-CARD LAYOUT COMPONENTS
+   Added for the redesigned Today screen (top bar, hero-art, next-medicine
+   card, timeline, family, appointment, mood, shortcuts, focused reminder)
+   ========================================================================== */
+
+/* --- Today Screen Shell --- */
+.today-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- 1. Top Bar: App logo + language switcher --- */
+.today-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 10px 20px;
+  flex-shrink: 0;
+}
+
+.top-brand-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-green);
+}
+
+.brand-heart-slot {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand-title-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary-green);
+  letter-spacing: -0.3px;
+}
+
+/* --- Audio Banner (replace old audio-unlock-strip) --- */
+.audio-banner-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 20px 10px 20px;
+  background: #EFF6FF;
+  border: 1.5px solid #BFDBFE;
+  border-radius: 20px;
+  padding: 14px 16px;
+}
+
+.audio-banner-ico {
+  color: #2563EB;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.audio-banner-msg {
+  flex: 1;
+}
+
+.audio-banner-msg strong {
+  display: block;
+  font-size: 19px;
+  color: #1E40AF;
+  font-weight: 800;
+}
+
+.audio-banner-msg small {
+  font-size: 18px;
+  color: #3B82F6;
+}
+
+.btn-start-audio {
+  background: #2563EB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+/* --- 2. Hero Art Card (illustrated, full-bleed backdrop) --- */
+.hero-art-card {
+  margin: 0 20px 0 20px;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
+}
+
+.hero-art-card.theme-morning {
+  background: linear-gradient(145deg, #FFE2CD 0%, #FFF3B8 100%);
+  color: #1F2937;
+}
+
+.hero-art-card.theme-afternoon {
+  background: linear-gradient(145deg, #BAE6FD 0%, #E0F2FE 100%);
+  color: #0C4A6E;
+}
+
+.hero-art-card.theme-night {
+  background: linear-gradient(145deg, #1E293B 0%, #0F172A 100%);
+  color: #F8FAFC;
+}
+
+.hero-art-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center bottom;
+  opacity: 0.6;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.hero-card-content {
+  position: relative;
+  z-index: 1;
+  padding: 20px 20px 22px 20px;
+}
+
+.hero-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.hero-theme-indicator {
+  display: flex;
+  align-items: center;
+}
+
+.hero-art-card.theme-morning .hero-theme-indicator { color: #D97706; }
+.hero-art-card.theme-afternoon .hero-theme-indicator { color: #0284C7; }
+.hero-art-card.theme-night .hero-theme-indicator { color: #FDE047; }
+
+.btn-speaker-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.hero-art-card.theme-night .btn-speaker-circle {
+  background: rgba(255, 255, 255, 0.18);
+  color: #F8FAFC;
+}
+
+.hero-greeting-title {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.hero-art-card.theme-night .hero-greeting-title { color: #F8FAFC; }
+
+.hero-clock-container {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 22px;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-art-card.theme-night .hero-clock-container {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.hero-clock-digits {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.hero-art-card.theme-night .hero-clock-digits { color: #F8FAFC; }
+
+.hero-clock-subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+.hero-art-card.theme-night .hero-clock-subtitle { color: #CBD5E1; }
+
+.clock-hold-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  margin-top: 8px;
+  opacity: 0.75;
+}
+
+/* --- MAIN BODY STACK (Cards with 20px gap) --- */
+.today-stack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 20px 0 20px;
+}
+
+/* Card header row (icon + title, used in timeline, family, appointment) */
+.card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.card-section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+/* --- 3. Next Medicine Card --- */
+.next-medicine-card {
+  /* inherits .card */
+}
+
+.next-med-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 16px;
+}
+
+.countdown-ring-box {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  flex-shrink: 0;
+}
+
+.countdown-ring-svg {
+  transform: rotate(-90deg);
+  display: block;
+}
+
+.ring-center-stat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+}
+
+.stat-prefix {
+  font-size: 16px;
+  color: var(--text-muted);
+  display: block;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.stat-digits {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary-green);
+  line-height: 1.1;
+}
+
+.next-med-summary-col {
+  flex: 1;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.next-med-heading {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.next-med-fraction {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.slim-prog-bar {
+  height: 10px;
+  background: #E5E7EB;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.slim-prog-fill {
+  height: 100%;
+  background: var(--primary-green);
+  border-radius: 5px;
+  transition: width 0.4s ease;
+  min-width: 6px;
+}
+
+/* Next pill preview row (amber accented) */
+.next-pill-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #FFFBEB;
+  border: 1.5px solid #FDE68A;
+  border-radius: 20px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.next-pill-svg-slot {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.next-pill-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.next-pill-time-badge {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #B45309;
+}
+
+.next-pill-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.next-pill-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+/* Empty state (all meds done) */
+.empty-state-pills-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 8px 0 16px 0;
+}
+
+.empty-state-asset {
+  width: 140px;
+  height: auto;
+}
+
+.empty-state-text {
+  font-size: 20px;
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+/* Button at bottom of next-medicine card */
+.btn-next-med-action {
+  margin-top: 4px;
+}
+
+/* --- 4. Timeline Card --- */
+.timeline-card {
+  /* inherits .card */
+}
+
+.timeline-rows-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-row-item {
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+}
+
+.timeline-row-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-row-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+
+.timeline-row-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.timeline-time {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 700;
+  display: block;
+}
+
+.timeline-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.timeline-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.timeline-count {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.timeline-thumbnails-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.timeline-row-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.timeline-badge {
+  font-size: 17px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.badge-done {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.badge-upcoming {
+  background: #F3F4F6;
+  color: var(--text-muted);
+}
+
+.badge-skipped {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.badge-missed {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.badge-due {
+  background: #FEF9C3;
+  color: #A16207;
+  border: 1.5px solid #FDE047;
+  animation: badgeDuePulse 2s infinite ease-in-out;
+}
+
+@keyframes badgeDuePulse {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 8px rgba(234, 179, 8, 0.6); }
+}
+
+.timeline-chevron {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+/* Expandable Drawer */
+.timeline-expanded-drawer {
+  padding: 0 0 14px 0;
+}
+
+/* Slim Missed Notice (inline, never full-screen) */
+.slim-missed-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #FFF1F2;
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1.5px solid #FECACA;
+  color: #991B1B;
+  margin-bottom: 12px;
+}
+
+.slim-missed-notice svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.slim-notice-text strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.slim-notice-text span {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.85;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+/* Expanded Pills List */
+.expanded-pills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.expanded-pill-card {
+  display: flex;
+  gap: 14px;
+  background: #F9FAFB;
+  border-radius: 20px;
+  padding: 14px;
+  border: 1px solid var(--border-light);
+}
+
+.expanded-pill-art {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expanded-pill-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.expanded-pill-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.expanded-pill-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.expanded-pill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.chip-taken {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+/* --- FOCUSED REMINDER MOMENT CARD (one pill at a time) --- */
+.focused-reminder-card {
+  border: 3px solid var(--accent-amber);
+  animation: attentionGlow 3s infinite ease-in-out;
+}
+
+.focused-card-top-indicator {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.reminder-pulse-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--accent-amber-light);
+  color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: pulseRing 2s infinite ease-in-out;
+}
+
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+}
+
+.focused-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.focused-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.focused-pill-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 16px 8px;
+}
+
+.focused-art-circle {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.focused-med-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.chip-dose-big {
+  background: #E0E7FF;
+  color: #3730A3;
+  font-size: 20px;
+  padding: 4px 14px;
+}
+
+.focused-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.focused-desc-text {
+  font-size: 20px;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* After-food box inside focused reminder */
+.after-food-box-focused {
+  background: #FEF3C7;
+  border-radius: 20px;
+  padding: 14px 16px;
+  border: 1.5px solid #FCD34D;
+  width: 100%;
+  text-align: left;
+  margin-top: 4px;
+}
+
+.after-food-q {
+  font-size: 20px;
+  color: #92400E;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.after-food-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-food-choice {
+  min-height: 54px;
+  border-radius: 16px;
+  border: 2px solid #D97706;
+  background: #FFFFFF;
+  color: #92400E;
+  font-family: var(--font-family);
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-food-choice.active {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: #FFFFFF;
+}
+
+.btn-food-choice.active-warn {
+  background: var(--soft-coral);
+  border-color: var(--soft-coral);
+  color: #FFFFFF;
+}
+
+.after-food-sub-hint {
+  font-size: 18px;
+  color: #B45309;
+  margin-top: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Pill step progress dots */
+.pill-step-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0 4px 0;
+}
+
+.pill-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #E5E7EB;
+  transition: all 0.2s ease;
+}
+
+.pill-dot.active {
+  background: var(--primary-green);
+  transform: scale(1.3);
+}
+
+.pill-dot.done {
+  background: #86EFAC;
+}
+
+/* Focused actions stack */
+.focused-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn-take-focused {
+  /* inherits .btn .btn-primary */
+}
+
+/* --- 5. From Family Card --- */
+.from-family-card {
+  /* inherits .card */
+}
+
+.family-message-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.family-avatar-slot {
+  flex-shrink: 0;
+}
+
+.family-bubble-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.family-quote-text {
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+.family-author-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.family-author-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #B45309;
+}
+
+.btn-voice-msg-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #E0E7FF;
+  color: #4338CA;
+  border: none;
+  border-radius: 14px;
+  padding: 6px 14px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 38px;
+}
+
+.btn-voice-msg-play:hover {
+  background: #C7D2FE;
+}
+
+/* --- 6. Appointment Card --- */
+.appointment-card {
+  /* inherits .card */
+}
+
+.appointment-body-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.appointment-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.appointment-doctor-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.appointment-specialty {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.appointment-time-loc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.btn-call-clinic {
+  min-height: 52px;
+  min-width: 110px;
+  width: auto;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* --- 7. Mood Check Card --- */
+.mood-check-card {
+  /* inherits .card */
+}
+
+.mood-faces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mood-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 10px 8px;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+}
+
+.mood-btn.active {
+  background: #ECFDF5;
+  border-color: var(--primary-green);
+  box-shadow: 0 4px 12px rgba(46, 125, 91, 0.15);
+}
+
+.mood-emoji-art {
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.mood-lbl {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 4px;
+}
+
+/* --- 8. Shortcut Tiles Row --- */
+.shortcuts-tiles-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.shortcut-tile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 24px;
+  padding: 16px 14px;
+  min-height: 76px;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-family);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-align: left;
+}
+
+.shortcut-tile:active {
+  transform: scale(0.96);
+}
+
+.tile-call {
+  background: #FFFFFF;
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+.tile-emergency {
+  background: var(--soft-coral-light);
+  border: 2px solid #FECACA;
+}
+
+.tile-emergency .shortcut-title,
+.tile-emergency .shortcut-sub {
+  color: var(--soft-coral-dark);
+}
+
+.shortcut-avatar-slot {
+  flex-shrink: 0;
+}
+
+.shortcut-icon-start,
+.shortcut-icon-end {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tile-emergency .shortcut-icon-start {
+  color: var(--soft-coral-dark);
+}
+
+.tile-call .shortcut-icon-end {
+  color: var(--primary-green);
+  margin-left: auto;
+}
+
+.shortcut-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shortcut-sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.shortcut-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+/* --- Celebration Asset (SVG image) --- */
+.celebration-art-wrap {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.celebration-img-asset {
+  width: 180px;
+  height: auto;
+}
+
+/* --- Family Avatar Circle (from icons.js renderFamilyAvatar) --- */
+.family-avatar-circle {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-family: var(--font-family);
+}
+
+.family-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* --- Slide-up stagger for Today cards --- */
+.today-stack-container > * {
+  animation: slideUpCard 0.3s ease-out both;
+}
+
+.today-stack-container > *:nth-child(1) { animation-delay: 0.04s; }
+.today-stack-container > *:nth-child(2) { animation-delay: 0.09s; }
+.today-stack-container > *:nth-child(3) { animation-delay: 0.14s; }
+.today-stack-container > *:nth-child(4) { animation-delay: 0.19s; }
+.today-stack-container > *:nth-child(5) { animation-delay: 0.24s; }
+.today-stack-container > *:nth-child(6) { animation-delay: 0.28s; }
+.today-stack-container > *:nth-child(7) { animation-delay: 0.32s; }
+
+/* Hero also slides up */
+.hero-art-card {
+  animation: slideUpCard 0.3s ease-out 0.02s both;
+}
+
+/* --- Modal Actions Row --- */
+.modal-actions-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   NEW COMPONENT RESPONSIVE: 390px and 360px viewports
+   ========================================================================== */
+
+@media (max-width: 390px) {
+  .hero-clock-digits {
+    font-size: 48px;
+  }
+
+  .hero-greeting-title {
+    font-size: 30px;
+  }
+
+  .focused-med-name {
+    font-size: 24px;
+  }
+
+  .countdown-ring-box {
+    width: 110px;
+    height: 110px;
+  }
+
+  .stat-digits {
+    font-size: 20px;
+  }
+
+  .timeline-title {
+    font-size: 20px;
+  }
+
+  .shortcuts-tiles-row {
+    gap: 10px;
+  }
+
+  .shortcut-tile {
+    padding: 12px 10px;
+    min-height: 68px;
+  }
+
+  .shortcut-title {
+    font-size: 18px;
+  }
+
+  .today-stack-container {
+    gap: 16px;
+    padding: 16px 16px 0 16px;
+  }
+
+  .today-top-bar {
+    padding: 14px 16px 8px 16px;
+  }
+
+  .hero-art-card {
+    margin: 0 16px;
+    min-height: 180px;
+  }
+
+  .mood-faces-grid {
+    gap: 8px;
+  }
+
+  .mood-btn {
+    min-height: 72px;
+  }
+}
+
+
+/* ==========================================================================
+   PRIORITY 1, 2, 3: ILLUSTRATIONS, ROLES, PASSCODES, PWA & ACCESSIBILITY
+   ========================================================================== */
+
+/* Fade-in animation for images and views */
+.fade-in-image {
+  animation: fadeInAsset 0.35s ease-out forwards;
+}
+
+.fade-in-view {
+  animation: fadeInView 0.25s ease-out forwards;
+}
+
+@keyframes fadeInAsset {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Zero horizontal scroll constraints */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+.carecircle-shell,
+.role-selection-screen,
+.today-screen,
+.medicines-screen,
+.info-screen,
+.family-screen,
+.wizard-screen {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Subtle parallax and gradient overlays for cards */
+.hero-art-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.85) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.theme-night .hero-art-overlay {
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.5) 0%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.role-art-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.6) 100%);
+  pointer-events: none;
+}
+
+/* Illustrated Empty States */
+.illustrated-empty-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  text-align: center;
+  background: #F8FAFC;
+  border-radius: 18px;
+  border: 1px dashed #E2E8F0;
+  margin-top: 8px;
+}
+
+.empty-state-art {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.empty-state-caption {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Top bar actions & Role chip */
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-bar-role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  background: #FFFFFF;
+  color: #1E293B;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s, background-color 0.15s;
+  min-height: 38px;
+}
+
+.top-bar-role-chip:active {
+  transform: scale(0.96);
+}
+
+.role-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.role-chip-family .role-status-dot { background: #3B82F6; }
+.role-chip-caretaker .role-status-dot { background: #F59E0B; }
+
+.offline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Who is using this? Screen */
+.role-selection-screen {
+  min-height: 100vh;
+  background: #F8FAFC;
+  padding-bottom: 40px;
+}
+
+.role-top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.role-header-text {
+  padding: 24px 20px 16px 20px;
+  text-align: center;
+}
+
+.role-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1E293B;
+  margin: 0 0 6px 0;
+}
+
+.role-subtitle {
+  font-size: 15px;
+  color: #64748B;
+  margin: 0;
+}
+
+.role-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+.role-select-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 22px;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+  min-height: 220px;
+}
+
+.role-select-card:hover, .role-select-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: #2E7D5B;
+  box-shadow: 0 8px 24px rgba(46, 125, 91, 0.14);
+}
+
+.role-card-art-wrap {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.role-card-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.role-card-info {
+  padding: 16px 18px;
+}
+
+.role-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.role-card-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1E293B;
+  margin: 0;
+}
+
+.role-type-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.badge-green { background: #ECFDF5; color: #059669; }
+.badge-blue { background: #EFF6FF; color: #2563EB; }
+.badge-amber { background: #FEF3C7; color: #D97706; }
+
+.role-card-desc {
+  font-size: 14px;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Passcode Keypad Modal */
+.passcode-overlay {
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+}
+
+.passcode-card {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 28px 28px 0 0;
+  padding: 24px 24px 32px 24px;
+  position: relative;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.passcode-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.passcode-shield-icon {
+  color: #2E7D5B;
+  margin-bottom: 8px;
+}
+
+.passcode-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1E293B;
+  margin: 0 0 6px 0;
+}
+
+.passcode-hint {
+  font-size: 14px;
+  color: #64748B;
+  margin: 0;
+}
+
+.text-error {
+  color: #DC2626 !important;
+  font-weight: 700;
+}
+
+.passcode-dots-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0 24px 0;
+}
+
+.p-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E1;
+  background: transparent;
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.p-dot.filled {
+  background: #2E7D5B;
+  border-color: #2E7D5B;
+  transform: scale(1.15);
+}
+
+.shake-anim {
+  animation: shakeKeypad 0.4s ease-in-out;
+}
+
+@keyframes shakeKeypad {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.passcode-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.keypad-digit, .keypad-special {
+  height: 60px;
+  border-radius: 18px;
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1E293B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.12s, transform 0.1s;
+}
+
+.keypad-digit:active, .keypad-special:active {
+  background: #E2E8F0;
+  transform: scale(0.94);
+}
+
+.keypad-special {
+  font-size: 18px;
+  color: #64748B;
+}
+
+/* Emergency Modal */
+.emergency-modal-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 24px;
+  max-width: 440px;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(220, 38, 38, 0.2);
+}
+
+.emergency-art-wrap {
+  margin-bottom: 16px;
+}
+
+.emergency-hero-art {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+.emergency-modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #DC2626;
+  margin: 0 0 6px 0;
+}
+
+.emergency-modal-sub {
+  font-size: 14px;
+  color: #64748B;
+  margin: 0 0 20px 0;
+}
+
+.emergency-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.btn-emergency-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #DC2626;
+  color: #FFFFFF;
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+  min-height: 56px;
+}
+
+.emergency-medical-info {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  background: #FEF2F2;
+  border-radius: 14px;
+  font-size: 13px;
+  color: #991B1B;
+}
+
+/* Family Dashboard Specific */
+.family-screen {
+  padding-bottom: 96px;
+}
+
+.family-top-bar {
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.family-main-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.family-elder-summary {
+  padding: 18px;
+}
+
+.family-header-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.round-elder-art {
+  border-radius: 50%;
+  border: 2px solid #E2E8F0;
+  object-fit: cover;
+}
+
+.care-badge-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #2563EB;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.family-elder-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1E293B;
+  margin: 2px 0;
+}
+
+.family-elder-sub {
+  font-size: 14px;
+  color: #64748B;
+  margin: 0;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.metric-box {
+  background: #F8FAFC;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
+  text-align: center;
+}
+
+.metric-score {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1E293B;
+}
+
+.metric-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748B;
+  margin-top: 4px;
+}
+
+.metric-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  background: #10B981;
+  border-radius: 4px;
+}
+
+.missed-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #FEF2F2;
+  border-radius: 14px;
+  border: 1px solid #FECACA;
+  margin-top: 8px;
+}
+
+.chip-acknowledged {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ECFDF5;
+  color: #059669;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 12px;
+}
+
+.current-family-note-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #FFF1F2;
+  border: 1px solid #FCE7F3;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+.cfn-quote {
+  font-size: 15px;
+  font-style: italic;
+  color: #881337;
+  margin: 0 0 4px 0;
+}
+
+.input-family-note {
+  width: 100%;
+  border: 2px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.input-family-note:focus {
+  border-color: #2E7D5B;
+  outline: none;
+}
+
+.compose-actions-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.recording-pulse {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  animation: pulseMic 1s infinite alternate;
+}
+
+@keyframes pulseMic {
+  from { opacity: 0.8; }
+  to { opacity: 1; transform: scale(1.02); }
+}
+
+.reports-hero-art {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.reports-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.report-stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border-radius: 12px;
+}
+
+.report-stat-val.text-green {
+  color: #059669;
+}
+
+/* Settings Switch Toggle */
+.settings-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #CBD5E1;
+  transition: 0.25s;
+  border-radius: 32px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.25s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .toggle-slider {
+  background-color: #2E7D5B;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-group-inline {
+  display: flex;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   LARGE TEXT ACCESSIBILITY MODE
+   ========================================================================== */
+body.large-text-mode {
+  font-size: 19px !important;
+}
+
+body.large-text-mode p,
+body.large-text-mode span,
+body.large-text-mode label,
+body.large-text-mode .chip-label,
+body.large-text-mode .nav-label-slot,
+body.large-text-mode .role-card-desc,
+body.large-text-mode .form-label {
+  font-size: max(18px, 1em) !important;
+  line-height: 1.5 !important;
+}
+
+body.large-text-mode button,
+body.large-text-mode a,
+body.large-text-mode input,
+body.large-text-mode select,
+body.large-text-mode textarea,
+body.large-text-mode .role-select-card,
+body.large-text-mode .shortcut-tile,
+body.large-text-mode .floating-nav-tab,
+body.large-text-mode .keypad-digit,
+body.large-text-mode .keypad-special {
+  min-height: 56px !important;
+  min-width: 56px !important;
+  font-size: max(18px, 1em) !important;
+}
+
+body.large-text-mode h1,
+body.large-text-mode .hero-clock-digits {
+  font-size: max(32px, 1.4em) !important;
+}
+
+body.large-text-mode h2,
+body.large-text-mode .card-section-title {
+  font-size: max(22px, 1.2em) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Zero horizontal scroll at 360px and 390px)
+   ========================================================================== */
+@media (max-width: 390px) {
+  body {
+    font-size: 15px;
+  }
+  .card {
+    padding: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .hero-art-card {
+    margin: 0 10px;
+  }
+  .role-cards-grid {
+    padding: 0 10px;
+  }
+  .shortcuts-tiles-row {
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .floating-nav-bar {
+    width: calc(100% - 20px);
+    left: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .top-bar-role-chip {
+    padding: 4px 6px;
+    font-size: 11px;
+    min-height: 34px;
+  }
+  .brand-title-text {
+    font-size: 16px;
+  }
+  .lang-pill-btn {
+    padding: 3px 5px;
+    font-size: 11px;
+  }
+  .card {
+    margin-left: 6px;
+    margin-right: 6px;
+    padding: 12px;
+  }
+  .hero-art-card {
+    margin: 0 6px;
+  }
+}

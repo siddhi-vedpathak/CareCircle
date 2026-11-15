@@ -1,0 +1,18 @@
+{
+  "name": "CareCircle - Elderly Care Coordination",
+  "short_name": "CareCircle",
+  "description": "Connected, compassionate care coordination for elderly loved ones.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7FAFC",
+  "theme_color": "#2E7D5B",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/img/elderly-couple.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

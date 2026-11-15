@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" fill="none">
+  <defs>
+    <linearGradient id="noMsgBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF1F2"/>
+      <stop offset="100%" stop-color="#FCE7F3"/>
+    </linearGradient>
+    <linearGradient id="envelopeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFF7ED"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="240" height="160" rx="24" fill="url(#noMsgBg)"/>
+
+  <!-- Warm family envelope -->
+  <g transform="translate(68, 45)">
+    <!-- Base Envelope -->
+    <rect x="0" y="15" width="104" height="68" rx="12" fill="url(#envelopeGrad)" stroke="#F472B6" stroke-width="2"/>
+    <!-- Flap Folds -->
+    <path d="M4 17 L52 56 L100 17" stroke="#F472B6" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M4 81 L38 48" stroke="#FBCFE8" stroke-width="2" stroke-linecap="round"/>
+    <path d="M100 81 L66 48" stroke="#FBCFE8" stroke-width="2" stroke-linecap="round"/>
+    <!-- Heart Seal in Center -->
+    <circle cx="52" cy="56" r="14" fill="#F43F5E"/>
+    <path d="M52 53 C49 48 43 48 41 53 C39 58 46 63 52 68 C58 63 65 58 63 53 C61 48 55 48 52 53 Z" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Floating Caring Speech Bubble - Left -->
+  <g transform="translate(28, 22)">
+    <path d="M10 0 H52 C57.5 0 62 4.5 62 10 V28 C62 33.5 57.5 38 52 38 H22 L10 46 V38 C4.5 38 0 33.5 0 28 V10 C0 4.5 4.5 0 10 0 Z" fill="#FDF2F8" stroke="#F472B6" stroke-width="2"/>
+    <!-- Mini Heart inside bubble -->
+    <path d="M31 16 C28 12 23 12 21 16 C19 20 25 24 31 29 C37 24 43 20 41 16 C39 12 34 12 31 16 Z" fill="#FB7185"/>
+  </g>
+
+  <!-- Little Warm Diya / Lamp on right side -->
+  <g transform="translate(178, 80)">
+    <path d="M12 24 C14 36 34 36 36 24 C28 24 20 24 12 24 Z" fill="#EA580C" stroke="#C2410C" stroke-width="2"/>
+    <!-- Golden Flame -->
+    <path d="M24 8 C20 14 18 20 24 24 C30 20 28 14 24 8 Z" fill="#F59E0B"/>
+    <circle cx="24" cy="18" r="3" fill="#FEF08A"/>
+  </g>
+
+  <!-- Small floating sparkle dots -->
+  <circle cx="195" cy="40" r="3" fill="#F472B6" opacity="0.6"/>
+  <circle cx="210" cy="52" r="2" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="45" cy="115" r="2.5" fill="#10B981" opacity="0.5"/>
+</svg>

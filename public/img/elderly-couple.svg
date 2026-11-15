@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none">
+  <defs>
+    <linearGradient id="coupleBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Warm background aura -->
+  <circle cx="120" cy="90" r="80" fill="url(#coupleBg)" fill-opacity="0.5"/>
+
+  <!-- Grandfather (Ajoba) - Left -->
+  <g transform="translate(45, 30)">
+    <!-- Body / Kurta -->
+    <path d="M15 88 Q35 76 55 88 L58 135 L12 135 Z" fill="#2E7D5B"/>
+    <path d="M30 84 L40 84 L38 105 L32 105 Z" fill="#E2E8F0"/>
+    
+    <!-- Neck -->
+    <rect x="30" y="72" width="10" height="15" rx="3" fill="#FBCFE8"/>
+
+    <!-- Head -->
+    <circle cx="35" cy="50" r="24" fill="#FCD34D"/>
+    <!-- Grey Hair -->
+    <path d="M12 48 Q10 26 35 26 Q60 26 58 48 Q55 32 35 32 Q15 32 12 48 Z" fill="#E2E8F0"/>
+    
+    <!-- Glasses -->
+    <circle cx="27" cy="48" r="6.5" stroke="#1F2937" stroke-width="2.5" fill="none"/>
+    <circle cx="43" cy="48" r="6.5" stroke="#1F2937" stroke-width="2.5" fill="none"/>
+    <line x1="33.5" y1="48" x2="36.5" y2="48" stroke="#1F2937" stroke-width="2.5"/>
+    <!-- Eyes smiling -->
+    <path d="M24 48 Q27 45 30 48" stroke="#1F2937" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M40 48 Q43 45 46 48" stroke="#1F2937" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- Gentle Smile -->
+    <path d="M30 58 Q35 64 40 58" stroke="#92400E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <!-- Moustache -->
+    <path d="M26 56 Q35 53 44 56 Q35 59 26 56 Z" fill="#E2E8F0"/>
+  </g>
+
+  <!-- Grandmother (Ajji) - Right -->
+  <g transform="translate(125, 32)">
+    <!-- Saree Body -->
+    <path d="M15 86 Q35 74 55 86 L58 133 L12 133 Z" fill="#F26B5B"/>
+    <path d="M22 84 Q35 98 48 133" stroke="#FBBF24" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+    <!-- Neck -->
+    <rect x="30" y="70" width="10" height="15" rx="3" fill="#FBCFE8"/>
+
+    <!-- Head -->
+    <circle cx="35" cy="48" r="23" fill="#FCD34D"/>
+    <!-- Grey Hair Bun & Sides -->
+    <path d="M12 48 Q10 24 35 24 Q60 24 58 48 Q55 28 35 28 Q15 28 12 48 Z" fill="#CBD5E1"/>
+    <circle cx="35" cy="18" r="10" fill="#94A3B8"/>
+
+    <!-- Red Bindi -->
+    <circle cx="35" cy="40" r="2.5" fill="#DC2626"/>
+
+    <!-- Eyes smiling -->
+    <path d="M23 48 Q27 43 31 48" stroke="#1F2937" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+    <path d="M39 48 Q43 43 47 48" stroke="#1F2937" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+    <!-- Warm Smile -->
+    <path d="M29 57 Q35 63 41 57" stroke="#92400E" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Little heart in middle -->
+  <path d="M120 44 C117 38 110 38 108 43 C106 48 112 54 120 60 C128 54 134 48 132 43 C130 38 123 38 120 44 Z" fill="#F26B5B"/>
+</svg>
