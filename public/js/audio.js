@@ -480,3 +480,11 @@ export class FamilyVoiceRecorder {
     }
   }
 }
+export function playBase64Audio(base64) {
+    if (!base64) return;
+
+    const audio = new Audio(`data:audio/mpeg;base64,${base64}`);
+    audio.play().catch(error => {
+        console.warn('Audio playback failed:', error);
+    });
+}
